@@ -10,13 +10,86 @@
         <h1>CodeCollège</h1>
             <nav>
                 <a href="../index.html">Accueil</a>
-                <a href="jeu.html">Jeux</a>
+                <a href="jeu.html">Mini Jeux</a>
                 <a href="info.html">Info numérique</a>
-                <a href="lybrinth.html">Labyrinthe</a>
+                <a href="lybrinth.html" target="_blank">Labyrinthe</a>
+                <a href="jeu_balle.html" target="_blank">Jeu_balle</a>
+                <a href="Roulette_Russe.html" target="_blank">Roulette_Russe</a>
                 <a href="contact.html">Contact</a>
             </nav>
     </header>
     <main>
+        <article>
+            <!-- liste des jeux-->
+            <h2>Jeux</h2>
+            <ul>
+                <li><a href="#jeu1">Jeu 1 deviner le chiffre</a></li>
+                <li><a href="#jeu2">Jeu 2 Phrase a complété</a></li>
+                <li><a href="#jeu3">Jeu 3 Quiz</a></li>
+                <li><a href="#jeu4">Jeu 4</a></li>
+                <li><a href="#jeu5">Jeu 5</a></li>
+            </ul>
+        
+
+        </article>
+        <div id="jeu1">
+            <h1>Jeu de devinette</h1>
+            <p>Devinez un nombre entre 1 et 10 :</p>
+            <input type="number" id="guess" min="1" max="10">
+            <button id="check">Vérifier</button>
+            <p id="message"></p>
+        
+            <script src="script.js"></script>
+        </div>
+
+            <div id="jeu2">
+                <h1>Jeu des métiers du numérique "Fonctionne pas"</h1>
+                <div id="game-container">
+                    <div id="job-list">
+                        <ul>
+                            <li draggable="true" data-job="developpeur-web">Développeur Web</li>
+                            <li draggable="true" data-job="data-analyst">Data Analyst</li>
+                            <li draggable="true" data-job="ingenieur-cybersecurite">Ingénieur en cybersécurité</li>
+                            <li draggable="true" data-job="designer-ui">Designer d'interface utilisateur</li>
+                        </ul>
+                    </div>
+                    <div id="description-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+                        <ul>
+                            <li data-description="description-1" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">______ Concevoir des interfaces utilisateur attrayantes et conviviales pour les applications et les sites web.</li>
+                            <li data-description="description-2" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">______ Analyser et interpréter des données pour aider les entreprises à prendre des décisions éclairées.</li>
+                            <li data-description="description-3" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">______ Assurer la sécurité des systèmes informatiques et des données contre les menaces en ligne.</li>
+                            <li data-description="description-4" ondragover="allowDrop(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)" ondrop="drop(event)">______ Créer et maintenir des sites web et des applications interactives.</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="check1">Vérifier</button>
+                <p id="message1"></p>
+            
+                <script src="script1.js"></script>
+        </div>
+
+            <div id="jeu3">
+                <h1>Jeu de quiz sur les technologies de l'information</h1>
+                <div id="quiz-container">
+                    <div id="question-container">
+                        <p id="question"></p>
+                    </div>
+                    <div id="options-container">
+                        <button class="option" id="option1"></button>
+                        <button class="option" id="option2"></button>
+                        <button class="option" id="option3"></button>
+                        <button class="option" id="option4"></button>
+                    </div>
+                </div>
+                <button id="next">Suivant</button>
+                <p id="message"></p>
+            
+                <script src="script2.js"></script>
+        </div>
+        <div id="jeu4">
+           
+                
+
         
     </main>
     <footer>
