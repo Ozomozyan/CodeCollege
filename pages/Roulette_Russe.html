@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette Russe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        let bullets = 0;
+        let prize = 0;
+
+        function fct2(id) {
+            let bulletElement = document.getElementById("Br" + id);
+            if (bulletElement.style.fill !== "red" && bullets < 3) {
+                bulletElement.style.fill = "red";
+                bullets++;
+            } else if (bulletElement.style.fill === "red") {
+                bulletElement.style.fill = "gray";
+                bullets--;
+            }
+        }
+
+        function resetBullets() {
+            for (let i = 0; i < 6; i++) {
+                document.getElementById("Br" + i).style.fill = "gray";
+            }
+            bullets = 0;
+        }
+
+        function play() {
+            let random = Math.random();
+            let chance = (6 - bullets) / 6;
+
+            if (random < chance) {
+                switch (bullets) {
+                    case 1:
+                        prize = 10000;
+                        break;
+                    case 2:
+                        prize = 100000;
+                        break;
+                    case 3:
+                        prize = 1000000;
+                        break;
+                }
+                document.getElementById("result").innerHTML = "Vous avez gagné " + prize + "€ !";
+            } else {
+                document.getElementById("result").innerHTML = "Vous avez perdu...";
+            }
+            resetBullets();
+        }
+    </script>
+</head>
+<body>
+    <h1>Roulette Russe</h1>
+
+    <svg width=200 height=200 style="background-color:antiquewhite">
+        <circle cx="100" cy="100" r="95" stroke="black" stroke-width="3" fill="none" />
+        <circle onclick="fct2(0)" id="Br0" cx="100" cy="30" r="25" stroke="black" stroke-width="3" fill="gray" />
+        <circle onclick="fct2(1)" id="Br1" cx="145" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
+        <circle onclick="fct2(2)" id="Br2" cx="145" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
+        <circle onclick="fct2(3)" id="Br3" cx="100" cy="170" r="25" stroke="black" stroke-width="3" fill="gray" />
+        <circle onclick="fct2(4)" id="Br4" cx="55" cy="130" r="25" stroke="black" stroke-width="3" fill="gray" />
+        <circle onclick="fct2(5)" id="Br5" cx="55" cy="70" r="25" stroke="black" stroke-width="3" fill="gray" />
+        <circle cx="100" cy="100" r="10" stroke="black" stroke-width="3" fill="black" />
+    </svg>
+
+    <button onclick="play()">Jouer</button>
+
+    <div id="result" class="result"></div>
+</body>
+</html>
 
