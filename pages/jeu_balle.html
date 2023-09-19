@@ -1,1 +1,129 @@
+<html>
+<head>
+<style>
+#zonedejeux{background-color:antiquewhite;
+            width:900px; height:400px;
+            position:absolute; top:3px; left:3px;
+            z-index:1;}
+h1{position:absolute;top:-7px; left:320px; z-index:2;}
+.score{position:absolute;top:10px; left:10px; z-index:2;}
+</style>
+
+<script>
+var score = 0;
+var speed = 3;
+
+function resetGame() {
+    score = 0;
+    speed = 3;
+    document.getElementById('score').innerHTML = "Score: " + score;
+    var blueBall = document.getElementById('blueBall');
+    blueBall.setAttribute("cx", 885);
+    blueBall.setAttribute("cy", 200);
+    blueBall.setAttribute("dx", -speed);
+}
+
+function checkCollision(redBall, blueBall) {
+    var redBallX = parseInt(redBall.getAttribute("cx"));
+    var redBallY = parseInt(redBall.getAttribute("cy"));
+    var blueBallX = parseInt(blueBall.getAttribute("cx"));
+    var blueBallY = parseInt(blueBall.getAttribute("cy"));
+
+    var distance = Math.sqrt(Math.pow(redBallX - blueBallX, 2) + Math.pow(redBallY - blueBallY, 2));
+    return distance < 30;
+}
+
+function bouger(){
+    var blueBall = document.getElementById('blueBall');
+    var redBall = document.getElementById('redBall');
+    var blueBallX = parseInt(blueBall.getAttribute("cx"));
+    var blueBallY = parseInt(blueBall.getAttribute("cy"));
+    var redBallY = parseInt(redBall.getAttribute("cy"));
+
+    // calculate new position based on current position and direction
+    var dx = parseInt(blueBall.getAttribute("dx"));
+    blueBallX = blueBallX + dx;
+
+    // reverse direction if the blue ball hits a wall
+    if (blueBallX <= 15 || blueBallX >= 885) {
+        dx = -dx;
+        score++;
+        speed += 0.5; // Change this value to modify how fast the blue ball speeds up
+        dx = dx > 0 ? speed : -speed; // Change the speed of the blue ball based on the new speed value
+        blueBall.setAttribute("dx", dx);
+        document.getElementById('score').innerHTML = "Score: " + score;
+    }
+
+    // make blue ball follow red ball on Y-axis
+    var dy = (redBallY - blueBallY) * 0.1;
+    blueBallY = blueBallY + dy;
+
+    // set new position
+    blueBall.setAttribute("cx", blueBallX);
+    blueBall.setAttribute("cy", blueBallY);
+
+    // check for collision
+    if (checkCollision(redBall, blueBall)) {
+        alert("You lost!");
+        resetGame();
+    }
+}
+
+function principale(){
+    resetGame();
+
+    // add key listener for red ball movement
+    window.addEventListener('keydown', deplacement, true);
+
+    // start moving the blue ball
+    enemy = setInterval(bouger, 30);
+}
+
+function deplacement(evt) {
+    var redBall = document.getElementById('redBall');
+    var redBallX = parseInt(redBall.getAttribute("cx"));
+    var redBallY = parseInt(redBall.getAttribute("cy"));
+
+    switch (evt.keyCode) {
+        // Left 
+        case 37:
+            redBallX -= 15;
+            if (redBallX < 15) { redBallX = 15; }
+            break;
+
+                // Right
+        case 39:
+            redBallX += 15;
+            if (redBallX > 885) { redBallX = 885; }
+            break;
+
+        // Up
+        case 38:
+            redBallY -= 15;
+            if (redBallY < 15) { redBallY = 15; }
+            break;
+
+        // Down
+        case 40:
+            redBallY += 15;
+            if (redBallY > 385) { redBallY = 385; }
+            break;
+    }
+
+    redBall.setAttribute("cx", redBallX);
+    redBall.setAttribute("cy", redBallY);
+}
+
+</script>
+</head>
+<body onload="principale()">
+    <h1>Jeux Javascript</h1>
+    <div class="score" id="score">Score: 0</div>
+    <svg id="zonedejeux">
+    <circle cx="450" cy="200" r="15" fill="tomato" id="redBall" />
+    <circle cx="885" cy="200" r="15" fill="blue" id="blueBall" />
+    
+    </svg>
+<body>
+</html>
 
